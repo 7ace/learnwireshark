@@ -29,9 +29,13 @@ Allow subdissector to reassemble TCP streams
 
 `Reassemble chunked transfe-coded bodies`
 
+<br/>
+
 **DNS**
 
 `Reassemble DNS messages spanning multiple TCP segments`
+
+<br/>
 
 **SSH**
 
@@ -45,9 +49,13 @@ Allow subdissector to reassemble TCP streams
 6，8-11 帧（5个重组 TCP Segments ），6，8-10 帧显示 TCP segment of a reassembled PDU ，11 帧会显示重组 TCP 的汇总信息[
 ](https://postimg.cc/CnHtTSqc)![TCP-SSH.png](https://cdn.nlark.com/yuque/0/2020/png/2777842/1604925583418-477bab21-0e68-446f-b9b6-565fcdb00da4.png#align=left&display=inline&height=234&margin=%5Bobject%20Object%5D&name=TCP-SSH.png&originHeight=234&originWidth=1301&size=37828&status=done&style=none&width=1301)
 
+<br/>
+
 **SSH 选项单开**
 6，8-11 帧，显示 Unreassembled packet ，TCP 不允许解析器重组 TCP 流
 ![SSH.png](https://cdn.nlark.com/yuque/0/2020/png/2777842/1604925637699-07814dec-5eb0-4f0e-8432-b9ad638a0e4f.png#align=left&display=inline&height=237&margin=%5Bobject%20Object%5D&name=SSH.png&originHeight=237&originWidth=1304&size=38794&status=done&style=none&width=1304)
+
+<br/>
 
 **TCP 选项单开**
 6，8-11 帧，显示 Malformed Packet ，TCP 上层协议 SSH 未开启重组信息识别

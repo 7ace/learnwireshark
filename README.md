@@ -38,6 +38,7 @@
 ## Wireshark 附录
 
 ## Wireshark 综合
+- [Checksum Offload](https://github.com/7ace/learnwireshark/blob/main/md/Wireshark%20%E7%BB%BC%E5%90%88/Checksum%20Offload.md)
 
 ## Wireshark 资料
 

@@ -46,8 +46,8 @@ Allow subdissector to reassemble TCP streams
 **3. SSH实例：**
 
 **TCP + SSH 选项双开**  
-6，8-11 帧（5个重组 TCP Segments ），6，8-10 帧显示 TCP segment of a reassembled PDU ，11 帧会显示重组 TCP 的汇总信息[
-](https://postimg.cc/CnHtTSqc)![TCP-SSH.png](https://cdn.nlark.com/yuque/0/2020/png/2777842/1604925583418-477bab21-0e68-446f-b9b6-565fcdb00da4.png#align=left&display=inline&height=234&margin=%5Bobject%20Object%5D&name=TCP-SSH.png&originHeight=234&originWidth=1301&size=37828&status=done&style=none&width=1301)
+6，8-11 帧（5个重组 TCP Segments ），6，8-10 帧显示 TCP segment of a reassembled PDU ，11 帧会显示重组 TCP 的汇总信息
+![TCP-SSH.png](https://cdn.nlark.com/yuque/0/2020/png/2777842/1604925583418-477bab21-0e68-446f-b9b6-565fcdb00da4.png#align=left&display=inline&height=234&margin=%5Bobject%20Object%5D&name=TCP-SSH.png&originHeight=234&originWidth=1301&size=37828&status=done&style=none&width=1301)
 
 <br/>
 

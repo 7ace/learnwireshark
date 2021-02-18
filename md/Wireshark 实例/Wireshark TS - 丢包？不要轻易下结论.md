@@ -40,7 +40,7 @@
 
 ![截图_20210208213021.png](https://cdn.nlark.com/yuque/0/2021/png/2777842/1612791991817-6e66e9e2-e913-4230-b14f-71a4a3e56191.png?x-oss-process=image%2Fresize%2Cw_1500)
 
-可以看到数据包57的 Seq 并非数据包56的 NextSeq，因此数据包57提示 **TCP** **Previous segment not captured，**意味着有丢包，大概2K多字节。
+可以看到数据包57的 Seq 并非数据包56的 NextSeq，因此数据包57提示 **TCP Previous segment not captured，** 意味着有丢包，大概2K多字节。
 
 但紧接着数据包58的 ACK 确认了6001，标记 **ACKed segment that wasn't caputred** ，代表说客户端确认收到了序列号6001之前的所有数据包。
 

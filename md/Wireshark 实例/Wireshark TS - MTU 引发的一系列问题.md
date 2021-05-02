@@ -40,7 +40,7 @@ To escape to local shell, press 'Ctrl+Alt+]'.
 **SSH 问题第一次（运维跳板机处抓包）**
 
 ![截图_20210426214846.png](https://cdn.nlark.com/yuque/0/2021/png/2777842/1619444977374-d4e1b5ae-cef9-4a40-a091-be282cf32021.png#align=left&display=inline&height=422&margin=%5Bobject%20Object%5D&name=%E6%88%AA%E5%9B%BE_20210426214846.png&originHeight=422&originWidth=1409&size=67191&status=done&style=none&width=1409)
-                                                                                图1
+图1
 
 
 三次握手以及 SSH 初始均正常，无法弹出用户名和密码框时的抓包信息如下：
@@ -63,6 +63,7 @@ _33 分组_ 提示 **TCP Previous segment not captured**，TCP上一分段( **Se
 <br/>
 
 **SSH 正常（运维跳板机处抓包）**
+
 正常线路运行时 SSH 的抓包，对比有问题的时候，看具体是哪个环节出了问题。就在苦苦人肉看包的同时，一同事在边上幽幽的来了一句：估计是运营商问题，Ping 哪哪哪小包就通，大包就不通，MTU 问题了。
 
 额。MTU，好吧，点醒了我们，继续看数据包，果然是这样。
@@ -83,6 +84,7 @@ _33 分组_ 提示 **TCP Previous segment not captured**，TCP上一分段( **Se
 图4中 分组35（长度122）、分组37（长度326），中间分组36（**长度1514**）。
 
 至此实锤确认联通线路问题，在运营商中间设备存在 MTU 设置小于 1500 的问题，这样 SSH 也包括业务在内，AWS 服务器正常发送数据字段长度 len = 1460 的包时，即大小在 1500 长度的数据包时，走到运营商设备上，因为 IP 字段 Don't fragment 设置的原因造成数据包丢包，之后引起一系列问题。
+
 ![截图_20210426223139.png](https://cdn.nlark.com/yuque/0/2021/png/2777842/1619447565908-9138d553-0ec9-4824-bfde-83ae48ff00bc.png#align=left&display=inline&height=219&margin=%5Bobject%20Object%5D&name=%E6%88%AA%E5%9B%BE_20210426223139.png&originHeight=219&originWidth=581&size=12428&status=done&style=none&width=581)
 
 <br/>

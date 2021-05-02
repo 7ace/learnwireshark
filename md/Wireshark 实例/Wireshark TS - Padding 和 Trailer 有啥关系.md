@@ -1,7 +1,13 @@
 # 背景
 惯例先说下背景，最起先是来自于一个 ARP 数据包分析，单说起 ARP 数据包组成是比较简单，但如下图所示，还是有些 Wireshark 技术点可以琢磨下，像是 Padding 和 Trailer 区别、相应的字节数大小、FCS 问题等等。
+
+<br/>
+
 ![截图_20210227203603.png](https://cdn.nlark.com/yuque/0/2021/png/2777842/1614429377326-ac3df82d-34a4-4c4e-9c93-8885fde69445.png#align=left&display=inline&height=215&margin=%5Bobject%20Object%5D&name=%E6%88%AA%E5%9B%BE_20210227203603.png&originHeight=215&originWidth=729&size=12764&status=done&style=none&width=729)
+
 前期也查询过很多资料或是网上咨询，但一直还是有些疑问，刚好最近和 NPM 厂商的兄弟相互讨论了下，感觉对此又有了更深的理解。
+
+<br/>
 
 # 分析
 先从最简单的 ARP 数据包说起，以前的文章提到过：
@@ -13,11 +19,15 @@
 ![](https://cdn.nlark.com/yuque/0/2021/png/2777842/1614432848675-e7ec177b-081c-42cc-afb5-f90b4fd53729.png#align=left&display=inline&height=470&margin=%5Bobject%20Object%5D&originHeight=470&originWidth=946&size=0&status=done&style=none&width=946)
 
 回到问题图：
+
 ![截图_20210227203603.png](https://cdn.nlark.com/yuque/0/2021/png/2777842/1614429377326-ac3df82d-34a4-4c4e-9c93-8885fde69445.png#align=left&display=inline&height=215&margin=%5Bobject%20Object%5D&name=%E6%88%AA%E5%9B%BE_20210227203603.png&originHeight=215&originWidth=729&size=12764&status=done&style=none&width=729)
+
 因含有 802.1Q 字段的缘故，判断数据包取自 trunk 端口，而 802.1Q 字段为 4 字节长度，考虑到以太网帧 60 字节最小长度，Wireshark 解析会认为全 0 连续填充 (Padding) 的长度只需要 14 字节即可达到 18 字节的需求，即：
 > 14 字节 ( Ethernet II 首部长度 ) + 28 字节 ( ARP 请求或应答 ) + 4 字节（ 802.1Q ）+ 14 字节 (** **Padding 填充数据 )  = 60 字节
 
 而额外多出的数据标记成 Trailer（4字节）。
+
+<br/>
 
 # 原理
 在 wireshark_dissector_packet-eth.c 中部分说明如下：
@@ -59,6 +69,7 @@ _Any_ 选项是为以太网帧最小长度填充任意字节的部分被视做 P
 
 默认不勾选。一般网卡都会剥离 FCS，所以 Wireshark 数据包分析时一般都没有 FCS 部分。可能存在 DPDK 技术下所抓取的数据包包含 FCS 的情况下，分析时可勾选打开该选项。
 
+<br/>
 
 # 参考
 wireshark_dissector_packet-eth.c

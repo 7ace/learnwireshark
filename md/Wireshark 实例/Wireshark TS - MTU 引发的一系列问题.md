@@ -48,7 +48,7 @@ To escape to local shell, press 'Ctrl+Alt+]'.
 ![截图_20210426214911.png](https://cdn.nlark.com/yuque/0/2021/png/2777842/1619445033451-918af6c9-ab7e-4d06-a951-e02797128ec6.png#align=left&display=inline&height=636&margin=%5Bobject%20Object%5D&name=%E6%88%AA%E5%9B%BE_20210426214911.png&originHeight=636&originWidth=1493&size=115218&status=done&style=none&width=1493)
 图2
 
-_33 分组 _提示 **TCP Previous segment not captured**，TCP上一分段( **Seq 3050** )未捕捉到，可能是真的未收到，也可能是抓包问题没捕获到。紧接着运维跳板机（客户端）192.168.1.1 一直请求 Seq 3050 分段未果（ TCP Dup ACK 34 #）, 之后一直服务器无回应。
+_33 分组_ 提示 **TCP Previous segment not captured**，TCP上一分段( **Seq 3050** )未捕捉到，可能是真的未收到，也可能是抓包问题没捕获到。紧接着运维跳板机（客户端）192.168.1.1 一直请求 Seq 3050 分段未果（ TCP Dup ACK 34 #）, 之后一直服务器无回应。
 
 <br/>
 
@@ -58,7 +58,7 @@ _33 分组 _提示 **TCP Previous segment not captured**，TCP上一分段( **Se
 ![截图_20210426220225.png](https://cdn.nlark.com/yuque/0/2021/png/2777842/1619445757705-e602e27e-c200-40d9-872b-0513489977fb.png#align=left&display=inline&height=502&margin=%5Bobject%20Object%5D&name=%E6%88%AA%E5%9B%BE_20210426220225.png&originHeight=502&originWidth=1499&size=87953&status=done&style=none&width=1499)
 图3
 
-问题依旧，仍然是在 _37 分组 _提示 **TCP Previous segment not captured**，仍然是 TCP 上一分段( **Seq 3050** )未捕捉到。额。好吧，又刚好是分段 3050 丢失，差不多可以判断认为是对端发了，但是本端没收到。
+问题依旧，仍然是在 _37 分组_ 提示 **TCP Previous segment not captured**，仍然是 TCP 上一分段( **Seq 3050** )未捕捉到。额。好吧，又刚好是分段 3050 丢失，差不多可以判断认为是对端发了，但是本端没收到。
 
 <br/>
 

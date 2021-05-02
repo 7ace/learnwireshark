@@ -34,6 +34,8 @@ _![icmp.png](https://cdn.nlark.com/yuque/0/2021/png/2777842/1616591897997-b4f846
 
 客户端在发送 SYN，服务器也响应 SYN/ACK 的情况下，客户端未能回应 ACK，即 TCP 三次握手中的第三个包。 
 
+<br/>
+
 故障分析：
 
 - 客户端没有收到 SYN/ACK：SYN/ACK 包在返回过程中，在某个节点上被拒绝了，该包未能到达客户端，客户端在1秒后发生 SYN 重传，为可能原因；
@@ -42,6 +44,8 @@ _![icmp.png](https://cdn.nlark.com/yuque/0/2021/png/2777842/1616591897997-b4f846
 
 基本可以确认是存在来回路径不一致的现象，通过了 NAT/防火墙的不同节点，造成了丢包。基于拓扑，正好是双节点对接处，进一步分析数据包，可以看到来回数据包的 mac 地址并不一样，一个是 R1 的内网口 mac 地址，一个是 R2 的内网口 mac 地址。
 ![截图_20210325154715.png](https://cdn.nlark.com/yuque/0/2021/png/2777842/1616658439500-57d3f007-76de-4c92-949a-1ad5670bc6bc.png#align=left&display=inline&height=138&margin=%5Bobject%20Object%5D&name=%E6%88%AA%E5%9B%BE_20210325154715.png&originHeight=138&originWidth=1998&size=36819&status=done&style=none&width=1998)
+
+<br/>
 
 故障定位：
 

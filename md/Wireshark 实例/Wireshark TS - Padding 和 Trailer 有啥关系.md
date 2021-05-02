@@ -39,23 +39,22 @@
 > - Calculate the amount of padding needed for a minimum sized frame.
 
 可以认为 **Trailer 是包含 Padding 的**，什么时候解析成 Padding ？一般是当数据帧长度小于 60 字节，需要进行全 0 填充以达到 60 字节最小长度时的部分会被认为是 Padding。
-**而额外多出的部分，需结合 FCS （4字节）判断有无的情况下，确认是否属于 Trailer **。再加上 Wireshark 强大的协议解析能力（ethernet-trailer dissectors），再确认属于哪一种 Trailer.
+**而额外多出的部分，需结合 FCS （4字节）判断有无的情况下，确认是否属于 Trailer**。再加上 Wireshark 强大的协议解析能力（ethernet-trailer dissectors），再确认属于哪一种 Trailer.
 > - Call all ethernet trailer dissectors to dissect the trailer if we actually have a trailer.
 > - No luck with the trailer dissectors, so just display the extra bytes as general trailer
 
-
+<br/>
 
 Wireshark 解析器协议 Ethernet 部分，其中有三个相关选项：
 
 1. **Assume padding for short frames with trailer（ Never、Zeros、Any）**
 
 _Never_ 选项是不考虑探测任何 Padding，在以太网 payload 之后的任何字节都被视为 Trailer。
-_Zeros (默认) _选项是为以太网帧最小长度连续填充全 0 字节的部分被视做 Padding，之外增加的部分被视为 Trailer.
+_Zeros (默认)_ 选项是为以太网帧最小长度连续填充全 0 字节的部分被视做 Padding，之外增加的部分被视为 Trailer.
 _Any_ 选项是为以太网帧最小长度填充任意字节的部分被视做 Padding，之外增加的部分被视为 Trailer.
-**
+
 
 2. **Fixed ethernet trailer length**
-
 
 默认值 0 。考虑到 TAP 或是类似负载均衡的代理设备，可能在 Payload 之后 FCS 之前增加固定长度的 trailer（像是高精度时间戳等等）时，可调整该值进行具体分析。
 > If there're some bytes left over, it could be a combination of:
@@ -63,7 +62,6 @@ _Any_ 选项是为以太网帧最小长度填充任意字节的部分被视做 P
 > - an FCS, if present
 > - information inserted by TAPs or other network monitoring equipment.
 
-**
 
 3. **Assume packets have FCS**
 

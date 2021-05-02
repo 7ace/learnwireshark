@@ -12,7 +12,7 @@
 # 分析
 先从最简单的 ARP 数据包说起，以前的文章提到过：
 > 14 字节 ( Ethernet II 首部长度 ) + **46 字节** ( 数据字段最小长度要求 ) + 4 字节 ( FCS ) = 64 字节
-> 28 字节 ( ARP 请求或应答 ) + 18 字节 (** Padding 填充数据** ) = 46 字节
+> 28 字节 ( ARP 请求或应答 ) + 18 字节 (**Padding 填充数据** ) = 46 字节
 
 因此 Padding 数据部分为 18 字节长度，如下图所示。
 
@@ -23,7 +23,7 @@
 ![截图_20210227203603.png](https://cdn.nlark.com/yuque/0/2021/png/2777842/1614429377326-ac3df82d-34a4-4c4e-9c93-8885fde69445.png#align=left&display=inline&height=215&margin=%5Bobject%20Object%5D&name=%E6%88%AA%E5%9B%BE_20210227203603.png&originHeight=215&originWidth=729&size=12764&status=done&style=none&width=729)
 
 因含有 802.1Q 字段的缘故，判断数据包取自 trunk 端口，而 802.1Q 字段为 4 字节长度，考虑到以太网帧 60 字节最小长度，Wireshark 解析会认为全 0 连续填充 (Padding) 的长度只需要 14 字节即可达到 18 字节的需求，即：
-> 14 字节 ( Ethernet II 首部长度 ) + 28 字节 ( ARP 请求或应答 ) + 4 字节（ 802.1Q ）+ 14 字节 (** **Padding 填充数据 )  = 60 字节
+> 14 字节 ( Ethernet II 首部长度 ) + 28 字节 ( ARP 请求或应答 ) + 4 字节（ 802.1Q ）+ 14 字节 (**Padding 填充数据**)  = 60 字节
 
 而额外多出的数据标记成 Trailer（4字节）。
 
@@ -71,6 +71,7 @@ _Any_ 选项是为以太网帧最小长度填充任意字节的部分被视做 P
 
 # 参考
 wireshark_dissector_packet-eth.c
+
 wireshark_dissectorpacket-ethertype.c
 
 

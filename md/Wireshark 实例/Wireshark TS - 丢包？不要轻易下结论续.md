@@ -1,5 +1,5 @@
 # 问题背景
-在《[Wireshark TS | 丢包？不要轻易下结论](https://github.com/7ace/learnwireshark/edit/main/md/Wireshark%20%E5%AE%9E%E4%BE%8B/Wireshark%20TS%20-%20%E4%B8%A2%E5%8C%85%EF%BC%9F%E4%B8%8D%E8%A6%81%E8%BD%BB%E6%98%93%E4%B8%8B%E7%BB%93%E8%AE%BA.md)》一文中，提到出现 **TCP Previous segment not captured** 和 **ACKed segment that wasn't caputred** 的一种情形，**可能是交换机镜像会话丢弃了数据包，而不是真实会话发生了数据包丢失，** 所以数据包文件才会显示有丢包，而且也才没有捕捉到数据包重传。总结来说，对于疑似丢包的情况，不要轻易下结论，需要结合上下文，看看是否有相应的乱序、重传或者快速重传等等，再来进一步分析判断问题。
+在《[Wireshark TS | 丢包？不要轻易下结论](https://github.com/7ace/learnwireshark/blob/main/md/Wireshark%20%E5%AE%9E%E4%BE%8B/Wireshark%20TS%20-%20%E4%B8%A2%E5%8C%85%EF%BC%9F%E4%B8%8D%E8%A6%81%E8%BD%BB%E6%98%93%E4%B8%8B%E7%BB%93%E8%AE%BA.md)》一文中，提到出现 **TCP Previous segment not captured** 和 **ACKed segment that wasn't caputred** 的一种情形，**可能是交换机镜像会话丢弃了数据包，而不是真实会话发生了数据包丢失，** 所以数据包文件才会显示有丢包，而且也才没有捕捉到数据包重传。总结来说，对于疑似丢包的情况，不要轻易下结论，需要结合上下文，看看是否有相应的乱序、重传或者快速重传等等，再来进一步分析判断问题。
 
 本文再次介绍一种 Wireshark 提示 **TCP Previous segment not captured** 和 **ACKed segment that wasn't caputred** 的情形，来具体分析是否存在丢包现象。
 
@@ -7,7 +7,9 @@
 
 # 问题描述
 抓包如下，在数据包初始即出现了熟悉的 Bad TCP 提示。
+
 ![1.png](https://cdn.nlark.com/yuque/0/2021/png/2777842/1622683243637-ef8498c6-c3f2-4b75-9f36-048f8023a85b.png#align=left&display=inline&height=119&margin=%5Bobject%20Object%5D&name=1.png&originHeight=119&originWidth=1635&size=23305&status=done&style=none&width=1635)
+
 单就从前5个数据包来说，筛选出 **_Seq、NextSeq、Ack_** 三列分析 ，Wireshark 的判断并没有任何问题。
 
 
@@ -17,7 +19,7 @@
 
 数据包4同数据包2一样，Ack 63 确认了63之前所有的分段，但实际上仍然缺少一个分段。
 
-因此对 Wireshark 来说，它的判断原则认为在传输方向 _**10.1.1.1 -> 10.1.2.1 **_ 上可能丢了一个 _**Seq 1 , NextSeq 2 , Ack 1**_ 的一个数据分段。
+因此对 Wireshark 来说，它的判断原则认为在传输方向 _**10.1.1.1 -> 10.1.2.1**_ 上可能丢了一个 _**Seq 1 , NextSeq 2 , Ack 1**_ 的一个数据分段。
 
 <br/>
 

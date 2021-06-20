@@ -8,17 +8,19 @@
 
 _**TCPing**_ 通过建立到网络主机的一个连接来模拟基于 TCP 上的 "Ping" ，测量_ **SYN**_ 和 _**SYN/ACK**_ 之间的时间。
 
-
 操作系统默认无此命令工具
+
 ![QQ截图20210509192608.png](https://cdn.nlark.com/yuque/0/2021/png/2777842/1620560503304-11f9b4be-2227-4f42-9b9c-4f5a2ab98c45.png#align=left&display=inline&height=408&margin=%5Bobject%20Object%5D&name=QQ%E6%88%AA%E5%9B%BE20210509192608.png&originHeight=408&originWidth=860&size=23365&status=done&style=none&width=860)
 
-
 在 C:\Windows\System32 下放置 tcping.exe 程序后
+
 ![QQ截图20210509194353.png](https://cdn.nlark.com/yuque/0/2021/png/2777842/1620560683478-6803c887-4ad7-4ea1-ada1-193fc13b69e5.png#align=left&display=inline&height=229&margin=%5Bobject%20Object%5D&name=QQ%E6%88%AA%E5%9B%BE20210509194353.png&originHeight=229&originWidth=489&size=8695&status=done&style=none&width=489)
+
 不加任何参数时，默认检查的端口是 80 ，端口检测开放以及测量时间如图。
 
 
 简单的端口参数应用，443 端口同样开放。
+
 ![QQ截图20210509194735.png](https://cdn.nlark.com/yuque/0/2021/png/2777842/1620560862496-67a9bdd0-398a-4d20-aa53-809411a4a40c.png#align=left&display=inline&height=204&margin=%5Bobject%20Object%5D&name=QQ%E6%88%AA%E5%9B%BE20210509194735.png&originHeight=204&originWidth=472&size=7099&status=done&style=none&width=472)
 
 
@@ -41,10 +43,12 @@ _**TCPing**_ 通过建立到网络主机的一个连接来模拟基于 TCP 上�
 
 
 Tcping 目标服务器 80 端口，结果显示 Port is open（赤裸裸的假象）。但 netstat 检查结果仅显示 SYN_SENT 状态，未建立连接。
+
 ![截图_20210509201601_meitu_1_meitu_4.jpg](https://cdn.nlark.com/yuque/0/2021/jpeg/2777842/1620564245432-31124a1b-9fbf-4841-bfe5-45bf69e17e0c.jpeg#align=left&display=inline&height=303&margin=%5Bobject%20Object%5D&name=%E6%88%AA%E5%9B%BE_20210509201601_meitu_1_meitu_4.jpg&originHeight=303&originWidth=543&size=54328&status=done&style=none&width=543)
 
 
 Wireshark 抓包结果同样仅显示 SYN 包（4次）发送，无响应，未正常建立连接。
+
 ![截图_20210509201710_meitu_2.jpg](https://cdn.nlark.com/yuque/0/2021/jpeg/2777842/1620563902281-c55d7cd4-1b60-4779-a6ab-4269bb1fa8bb.jpeg#align=left&display=inline&height=260&margin=%5Bobject%20Object%5D&name=%E6%88%AA%E5%9B%BE_20210509201710_meitu_2.jpg&originHeight=260&originWidth=1198&size=242974&status=done&style=none&width=1198)
 > 忽略源端口不一样，netstat 和 wireshark 取的结果非同一次。
 
